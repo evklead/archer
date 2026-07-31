@@ -1,0 +1,11 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = *
+
+[Action]
+Description = Running system backup before pacman transaction...
+When = PreTransaction
+Exec = /bin/sh -c '/usr/local/bin/system_backup.sh "$(date +%F-%T)"'
+AbortOnFail

@@ -1,0 +1,13 @@
+plasma-desktop
+plasma-login-manager
+power-profiles-daemon
+kscreen
+plasma-pa
+plasma-nm
+konsole
+dolphin
+kate
+bluez
+bluedevil
+spectacle
+okular

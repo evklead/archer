@@ -1,0 +1,3 @@
+bluetooth
+power-profiles-daemon
+plasmalogin
