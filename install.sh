@@ -2,30 +2,33 @@
 
 set -e
 
-echo "Available block devices:"
-lsblk
+echo "Server = http://192.168.101.11:7878/\$repo/os/\$arch" >/etc/pacman.d/mirrorlist
+echo "Server = https://nocix.mm.fcix.net/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist
+
+echo "Available drives:"
+lsblk -do NAME,SIZE,MODEL
 
 while true; do
-    read -p "Device to use for ROOT (without '/dev/'): " rootdisk
+    read -p "Device name to use for ROOT: " rootdisk
     if [ -z "$rootdisk" ]; then
-        echo "Please provide a correct block device name."
+        echo "Please provide a correct device name."
     elif [ ! -b "/dev/$rootdisk" ]; then
-        echo "The block device doesn't exist. Try again."
+        echo "The drive doesn't exist. Try again."
     else
         break
     fi
 done
 
-read -p "Use a separate block device for HOME? [y/n] " yn
+read -p "Use a separate drive for HOME? [y/n] " yn
 if [[ "$yn" =~ ^[Yy]$ ]]; then
     while true; do
-        read -p "Device to use for HOME (without '/dev/'): " homedisk
+        read -p "Device name to use for HOME: " homedisk
         if [ -z "$homedisk" ]; then
-            echo "Please provide a correct block device name."
+            echo "Please provide a correct device name."
         elif [ ! -b "/dev/$homedisk" ]; then
-            echo "The block device doesn't exist. Try again."
+            echo "The device doesn't exist. Try again."
         elif [ "$homedisk" == "$rootdisk" ]; then
-            echo "ERROR - trying to set up a separate block device for HOME but using the same device name as for ROOT. Try again."
+            echo "ERROR - trying to set up a separate drive for HOME but using the same device name as for ROOT. Try again."
         else
             break
         fi
