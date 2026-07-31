@@ -42,3 +42,8 @@ cd archer
 - If the desktop environment is installed, then all Systemd services listed in `top-off/desktop_services.txt` will be enabled. Adjust as needed.
 - Everything from `top-off/usercontent/home` will be copied to the home directory of the user created by the installer.
 - The installer will run any scripts added to `top-off/usercontent/scripts`
+
+## Limitations and known issues
+- At this point, the installer works with UEFI systems only
+- In some situations, the installation may fail on the BTRFS creation step, because of the race condition after re-partitioning of block devices.
+
